@@ -1,0 +1,54 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: 2019-02-01T22:03:01Z
+  name: example.cluster.k8s.local
+spec:
+  api:
+    loadBalancer:
+      type: Public
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: s3://example.ronen.cluster.com/example.cluster.k8s.local
+  etcdClusters:
+  - etcdMembers:
+    - instanceGroup: master-us-east-1b
+      name: b
+    name: main
+  - etcdMembers:
+    - instanceGroup: master-us-east-1b
+      name: b
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubelet:
+    anonymousAuth: false
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  kubernetesVersion: 1.11.6
+  masterInternalName: api.internal.example.cluster.k8s.local
+  masterPublicName: api.example.cluster.k8s.local
+  networkCIDR: 172.31.0.0/16
+  networkID: vpc-8ea515f4
+  networking:
+    kubenet: {}
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 0.0.0.0/0
+  subnets:
+  - cidr: 172.31.96.0/20
+    name: us-east-1b
+    type: Public
+    zone: us-east-1b
+  topology:
+    dns:
+      type: Private
+    masters: public
+    nodes: public
